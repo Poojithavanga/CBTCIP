@@ -1,0 +1,50 @@
+
+pip install pandas
+pip install pandas
+pip install matplotlib.pyplot
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+iris_data_set = pd.read_csv("C:\\Users\\dell\\Downloads\\Iris Flower - Google Sheets.csv")
+iris_data_set.head()
+iris_data_set=iris_data_set.drop(columns='Id',axis=0)
+iris_data_set.head()
+iris_data_set.isnull().sum()
+iris_data_set.isna().sum()
+iris_data_set.describe()
+fig=plt.figure(figsize=(20,5))
+sns.lmplot(data=iris_data_set,x ='SepalWidthCm', y ='SepalLengthCm', hue ="Species")
+plt.title("Comparision of sepal width and sepal length of Iris flower")
+fig=plt.figure(figsize=(20,5))
+sns.lmplot(data=iris_data_set,x ='PetalWidthCm', y ='PetalLengthCm', hue ="Species")
+plt.title("Comparision of petal width and petal length of Iris flower")
+plt.figure(figsize=(20,5))
+sns.pairplot(data=iris_data_set,hue="Species", diag_kind='kde')
+data = iris_data_set.values
+x= data[:,:4]
+y= data[:,4]
+pip install scikit-learn
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
+train_x , test_x , train_y , test_y = train_test_split(x,y,test_size=0.2)
+model_svm = SVC()
+model_svm.fit(train_x,train_y)
+pred_svm = model_svm.predict(test_x)
+from sklearn.metrics import accuracy_score
+accuracy_score(test_y , pred_svm)
+from sklearn.tree import DecisionTreeClassifier
+model= DecisionTreeClassifier()
+model.fit(train_x,train_y)
+predict=model.predict(test_x)
+accuracy_score(test_y,predict)
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import classification_report
+knn_model = KNeighborsClassifier(n_neighbors = 3)
+knn_model.fit(train_x,train_y)
+knn_prediction = knn_model.predict(test_x)
+accuracy_score(test_y,knn_prediction)
+print(classification_report(test_y,knn_prediction))
+print(classification_report(test_y,pred_dtr))
+print(classification_report(test_y,pred_svm))
+
+
